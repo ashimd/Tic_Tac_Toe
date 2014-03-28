@@ -172,42 +172,46 @@ function gameOver(mouseX, mouseY) {
         zeroPoint = [],
         crossPoint = [],
         maxLength = 0;
-    if (takenPoints.length >= 3) {
-        for (i = 0; i < takenPoints.length; i++) {
-            if (takenCrossZero[i] == 'X')
-                crossPoint.push(takenPoints[i]);
-            else
-                zeroPoint.push(takenPoints[i]);
-            pointsDetail += '\n pos - [' + takenPoints[i] + '] : ' + takenCrossZero[i] + '.';
-        }
+    if (takenPoints.length == 9) {
+        alert("Game Over, a Draw!!!");
+        erase();
+        draw(drawColor);
+        crossZero = 'X',
+        takenPoints = [],
+        takenCrossZero = [],
+        existPoint = 0,
+        i = 0;
+    }
+    else {
+        if (takenPoints.length >= 3) {
+            for (i = 0; i < takenPoints.length; i++) {
+                if (takenCrossZero[i] == 'X')
+                    crossPoint.push(takenPoints[i]);
+                else
+                    zeroPoint.push(takenPoints[i]);
+                pointsDetail += '\n pos - [' + takenPoints[i] + '] : ' + takenCrossZero[i] + '.';
+            }
 
-        zeroPoint.sort();
-        crossPoint.sort();
+            zeroPoint.sort();
+            crossPoint.sort();
 
-        if (zeroPoint.length >= 3 || crossPoint.length >= 3) {
-            debugger;
-            for (i = 0; i < endPoints.length; i++) {
-                //if (zeroPoint.contains(endPoints[i][0]) && zeroPoint.contains(endPoints[i][1]) && zeroPoint.contains(endPoints[i][2])) {
-                //    drawGameOver(i, '0');
-                //    return;
-                //}
-                //if (crossPoint.contains(endPoints[i][0]) && crossPoint.contains(endPoints[i][1]) && crossPoint.contains(endPoints[i][2])) {
-                //    drawGameOver(i, '0');
-                //    return;
-                //}
-                if (zeroPoint.contains(endPoints[i][0])) {
-                    if (zeroPoint.contains(endPoints[i][1])) {
-                        if (zeroPoint.contains(endPoints[i][2])) {
-                            drawGameOver((i + 1), endPoints[i][0], endPoints[i][1], endPoints[i][2], '0');
-                            return 0;
+            if (zeroPoint.length >= 3 || crossPoint.length >= 3) {
+                debugger;
+                for (i = 0; i < endPoints.length; i++) {
+                    if (zeroPoint.contains(endPoints[i][0])) {
+                        if (zeroPoint.contains(endPoints[i][1])) {
+                            if (zeroPoint.contains(endPoints[i][2])) {
+                                drawGameOver((i + 1), endPoints[i][0], endPoints[i][1], endPoints[i][2], '0');
+                                return 0;
+                            }
                         }
                     }
-                }
-                if (crossPoint.contains(endPoints[i][0])) {
-                    if (crossPoint.contains(endPoints[i][1])) {
-                        if (crossPoint.contains(endPoints[i][2])) {
-                            drawGameOver((i + 1), endPoints[i][0], endPoints[i][1], endPoints[i][2], 'X');
-                            return 0;
+                    if (crossPoint.contains(endPoints[i][0])) {
+                        if (crossPoint.contains(endPoints[i][1])) {
+                            if (crossPoint.contains(endPoints[i][2])) {
+                                drawGameOver((i + 1), endPoints[i][0], endPoints[i][1], endPoints[i][2], 'X');
+                                return 0;
+                            }
                         }
                     }
                 }
@@ -222,9 +226,9 @@ function drawGameOver(pos, pnt1, pnt2, pnt3, pointTic) {
     plotPoints(pnt2, drawComplete, pointTic);
     plotPoints(pnt3, drawComplete, pointTic);
     if (pointTic == 'X')
-        alert("Game Over, Player 1 Wins " + pos);
+        alert("Game Over, Player 1 Wins!!!");
     else
-        alert("Game Over, Player 2 Wins " + pos);
+        alert("Game Over, Player 2 Wins!!!");
 
     erase();
     draw(drawColor);
